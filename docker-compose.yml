@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+    client-arrays-service:
+        container_name: client-arrays-service
+        restart: always
+        build: 
+            context: ./client-arrays-service
+        ports:
+            - '3005:3005'
+        depends_on:
+            - log-service
+            
+    log-service:
+        container_name: log-service
+        restart: always
+        build: 
+            context: ./log-service
+        ports:
+            - '3006:3006'
+
+    client-ui:
+        container_name: client-ui
+        restart: always
+        build: 
+            context: ./client-ui
+        ports:
+            - '3000:3000'
+        depends_on:
+            - client-arrays-service
